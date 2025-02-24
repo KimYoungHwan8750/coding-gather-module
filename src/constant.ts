@@ -33,8 +33,16 @@ export const Language = {
   C: "C" as LanguageType
 } as const;
 
+export const WebsocketEvent = {
+  INPUT_TEXT: "inputText",
+  CHANGE_LANGUAGE: "changeLanguage",
+  CHANGE_TOOL: "changeTool",
+  SEARCH: "search",
+} as const;
+
 export const AppConstant = {
   direction: Direction,
   tools: Tools,
-  language: Language
+  language: Language,
+  websocketEvent: WebsocketEvent
 } as const;
