@@ -1,14 +1,14 @@
-import { LanguageType } from "./constant"
+import { DirectionType, LanguageType } from "./constant"
 
 export type AllPayload = InputTextPayload | ChangeLanguagePayload | SearchPayload | string
 
 export type InputTextPayload = {
-  direction: string
+  direction: DirectionType
   text: string
 }
 
 export type ChangeLanguagePayload = {
-  direction: string
+  direction: DirectionType
   language: LanguageType
 
 }
