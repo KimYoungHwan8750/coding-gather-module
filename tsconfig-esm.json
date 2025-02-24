@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "dist/mjs",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  },
+}
