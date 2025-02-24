@@ -29,6 +29,12 @@ export class EditorData {
     this.text = text;
   }
 
+  toString() {
+    return `direction: ${this.direction}\n` +
+    `language: ${this.language}\n` +
+    `text: ${this.text}`;
+  }
+
 }
 
 export class CanvasData {
@@ -59,6 +65,11 @@ export class CanvasData {
   setTool(tool: ToolsType) {
     this.tool = tool;
     return tool;
+  }
+
+  toString() {
+    return `url: ${this.url}\n` +
+    `tools: ${this.tool}`;
   }
 }
 
