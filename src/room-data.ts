@@ -2,142 +2,99 @@ import { AppConstant, DirectionType, LanguageType, Tools, ToolsType } from "./co
 
 export class EditorData {
 
-  constructor(private readonly direction: DirectionType, private language: LanguageType, private text: string) {
+  constructor(public readonly direction: DirectionType, public language: LanguageType, public text: string) {
     this.direction = direction;
     this.language = language;
     this.text = text;
   }
+}
+
+export class EditorController {
+  private editorData: EditorData;
+  constructor(direction: DirectionType) {
+    this.editorData = new EditorData(direction, AppConstant.language.PLAIN_TEXT, "");
+  }
 
   getDirection() {
-    return this.direction;
+    return this.editorData.direction;
   }
 
   getLanguage() {
-    return this.language;
+    return this.editorData.language;
   }
 
   getText() {
-    return this.text;
+    return this.editorData.text;
   }
 
   setLanguage(language: LanguageType) {
-    this.language = language;
+    this.editorData.language = language;
   }
 
   setText(text: string) {
-    this.text = text;
+    this.editorData.text = text;
   }
 
   toString() {
-    return `direction: ${this.direction}\n` +
-    `language: ${this.language}\n` +
-    `text: ${this.text}`;
+    return `direction: ${this.editorData.direction}\n` +
+    `language: ${this.editorData.language}\n` +
+    `text: ${this.editorData.text}`;
   }
-
-  withLanguage(language: LanguageType) {
-    return new EditorData(this.direction, language, this.text);
-  }
-
-  withText(text: string) {
-    return new EditorData(this.direction, this.language, text);
-  }
-
-  withDirection(direction: DirectionType) {
-    return new EditorData(direction, this.language, this.text);
-  }
-
 }
 
 export class CanvasData {
-  private url: string = "";
-  private binary: Uint8Array = Uint8Array.from([]);
-  private tool: ToolsType = Tools.CURSOR;
-  private pending: boolean = false;
+  public url: string = "";
+  public tool: ToolsType = Tools.CURSOR;
+  public pending: boolean = false;
+}
 
+export class CanvasController {
+  private readonly canvasData: CanvasData = new CanvasData();
   getUrl() {
-    return this.url;
-  }
-
-  getBinary() {
-    return this.binary;
+    return this.canvasData.url;
   }
 
   getTool() {
-    return this.tool;
+    return this.canvasData.tool;
   }
 
   setUrl(url: string) {
-    this.url = url;
-  }
-
-  setBinary(binary: Uint8Array) {
-    this.binary = binary;
+    this.canvasData.url = url;
   }
 
   setTool(tool: ToolsType) {
-    this.tool = tool;
+    this.canvasData.tool = tool;
     return tool;
   }
 
   isPending() {
-    return this.pending;
+    return this.canvasData.pending;
   }
 
   setPending(pending: boolean) {
-    this.pending = pending;
+    this.canvasData.pending = pending;
   }
 
   toString() {
-    return `url: ${this.url}\n` +
-    `tools: ${this.tool}`;
-  }
-
-  withUrl(url: string) {
-    const canvas = new CanvasData();
-    canvas.setUrl(url);
-    canvas.setBinary(this.binary);
-    canvas.setTool(this.tool);
-    canvas.setPending(this.pending);
-    return canvas;
-  }
-
-  withBinary(binary: Uint8Array) {
-    const canvas = new CanvasData();
-    canvas.setUrl(this.url);
-    canvas.setBinary(binary);
-    canvas.setTool(this.tool);
-    canvas.setPending(this.pending);
-    return canvas;
-  }
-
-  withTool(tool: ToolsType) {
-    const canvas = new CanvasData();
-    canvas.setUrl(this.url);
-    canvas.setBinary(this.binary);
-    canvas.setTool(tool);
-    canvas.setPending(this.pending);
-    return canvas;
-  }
-
-  withPending(pending: boolean) {
-    const canvas = new CanvasData();
-    canvas.setUrl(this.url);
-    canvas.setBinary(this.binary);
-    canvas.setTool(this.tool);
-    canvas.setPending(pending);
-    return canvas;
+    return `url: ${this.canvasData.url}\n` +
+    `tools: ${this.canvasData.tool}`;
   }
 }
 
-export type EditorDatasType = {
-  topEditorData: EditorData
-  bottomEditorData: EditorData
+export class DrawingCanvasData {
+  imageData: ImageData | null = null;
 }
-export class EditorDatas{
-  topEditorData: EditorData = new EditorData(AppConstant.direction.TOP, AppConstant.language.PLAIN_TEXT, "");
-  bottomEditorData: EditorData = new EditorData(AppConstant.direction.BOTTOM, AppConstant.language.PLAIN_TEXT, "");
 
-  getCorrectDirectionEditor(direction: DirectionType): EditorData {
-    return direction === AppConstant.direction.TOP ? this.topEditorData : this.bottomEditorData;
-  }
+export class DrawingCanvasDataController {
+
+}
+
+export type EditorsControllerType = {
+  topEditorController: EditorController
+  bottomEditorController: EditorController
+}
+
+export class EditorsController{
+  topEditorController: EditorController = new EditorController(AppConstant.direction.TOP);
+  bottomEditorController: EditorController = new EditorController(AppConstant.direction.BOTTOM);
 }
