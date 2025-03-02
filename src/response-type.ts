@@ -1,10 +1,10 @@
+import { CanvasData, EditorData } from "room-data";
 import { LanguageType } from "./constant";
 import { ChangeLanguagePayload, InputTextPayload } from "./payload-type";
+import { Mutable } from "util-type";
 
 export type SearchResponse = {
-  code: 200 | 404
-  binary: Uint8Array
-  message?: string
+  pending: boolean
 }
 
 export type InputTextResponse = {
@@ -14,3 +14,9 @@ export type InputTextResponse = {
 export type ChangeLanguageResponse = {
 
 } & ChangeLanguagePayload
+
+export type FirstJoinResponse = {
+  topEditorData: Mutable<EditorData>
+  bottomEditorData: Mutable<EditorData>
+  canvasData: CanvasData
+}
