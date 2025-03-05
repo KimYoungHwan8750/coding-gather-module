@@ -38,11 +38,17 @@ export const WebsocketEvent = {
   CHANGE_LANGUAGE: "changeLanguage",
   CHANGE_TOOL: "changeTool",
   SEARCH: "search",
+  FIRST_JOIN: "firstJoin",
 } as const;
+
+export type ZoomLevelType = -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4;
+export type CanvasMouseState = "idle" | "down" | "move" | "up";
 
 export const AppConstant = {
   direction: Direction,
   tools: Tools,
   language: Language,
-  websocketEvent: WebsocketEvent
+  websocketEvent: WebsocketEvent,
+  maxZoomLevel: 4 as ZoomLevelType,
+  minZoomLevel: -4 as ZoomLevelType,
 } as const;
